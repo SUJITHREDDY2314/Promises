@@ -7,7 +7,9 @@ export default function Child(props) {
   return (
     <div>
       {objects}
-      <button onClick={props.fun}>  Click Me </button>
+      <button onClick={props.fun}>
+        {props.click ? "Click to reveal" : "Click to hide"}{" "}
+      </button>
     </div>
   );
 }
