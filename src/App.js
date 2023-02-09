@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
-
+import Child from "./Child";
+import React from "react";
 function App() {
+  const [dataToPass, setData] = React.useState({});
+
+
+  React.useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/todos/1")
+      .then((response) => response.json())
+      .then((res) => setData(res));
+  }); 
+  // to avoid setting every time and infinite loop
+
+  const funcToReset = () => {
+    console.log("iam invoked");
+    setData({});
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <p>My react app</p>
+      <Child key={dataToPass.id} test="hi" obj={dataToPass} fun={funcToReset} />
     </div>
   );
 }
